@@ -130,3 +130,15 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+
+  bw-sidecar:
+    build: ./sidecar-service
+    container_name: bw-sidecar
+    ports:
+      - "9100:9100"
+    volumes:
+      - ./sidecar-service/logs:/logs
+    depends_on:
+      - bw-auth-service
+      - bw-post-service
+
